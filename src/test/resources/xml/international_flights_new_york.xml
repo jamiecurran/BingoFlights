@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<flights>
+    <flight number="KS125666">
+        <carrier>
+            <code>XXG6788000</code>
+            <name>United Airlines</name>
+            <country>USA</country>
+        </carrier>
+        <departure>
+            <country>USA</country>
+            <city>New York</city>
+            <airport code="JFK">John F. Kennedy International Airport</airport>
+            <time>2013-03-17T09:02:00Z</time>
+            <service_company>RG6899-9878</service_company>
+        </departure>
+        <destination>
+            <country>UK</country>
+            <city>London</city>
+            <airport code="LHW">London Heathrow</airport>
+            <time>2013-03-17T17:18:00Z</time>
+            <service_company>XD6777-1223</service_company>
+        </destination>
+    </flight>
+</flights>

@@ -1,0 +1,31 @@
+{
+    "errors":false,
+    "flights":[
+        {
+            "flightNumber":"AS125666",
+            "carrier":"British Airways",
+            "departure":{
+                "country":"UK",
+                "city":"London",
+                "airport":{
+                    "name":"London Heathrow",
+                    "code":"LHW"
+                },
+                "time":"2013-03-23 10:25 +0100"
+            },
+            "destination":{
+                "country":"Canada",
+                "city":"Vancouver",
+                "airport":{
+                    "code":"YVR",
+                    "name":"Vancouver International"
+                },
+                "time":"2013-03-23 22:33 +0100"
+            }
+
+        }
+    ]
+}
+
+
+

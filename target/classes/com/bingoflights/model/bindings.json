@@ -1,0 +1,23 @@
+{
+   "package-name" : "com.bingoflights.model",
+   "xml-type" : {
+    "prop-order" : "errors flights"
+   },
+   "java-types": {
+     "java-type": [{
+      "name": "FlightsDTO"
+     }],
+     "java-type": [{
+      "name": "Flight",
+      "xml-type" : {
+        "prop-order" : "flightNumber carrier departure destination"
+      }
+     }],
+     "java-type": [{
+      "name": "Location",
+      "xml-type" : {
+        "prop-order" : "country city airport time"
+      }
+     }]
+   }
+}
