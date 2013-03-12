@@ -6,12 +6,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduledFlightsDTO {
 
     private Boolean errors;
-    private List<Flight> flights;
+    private List<Flight> flights = new ArrayList<Flight>();
 
     public void setErrors(Boolean errors) {
         this.errors = errors;

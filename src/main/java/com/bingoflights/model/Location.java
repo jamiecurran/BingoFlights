@@ -1,6 +1,7 @@
 package com.bingoflights.model;
 
 import com.bingoflights.service.utils.DateAdapter;
+import org.joda.time.DateTime;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
@@ -11,7 +12,7 @@ public class Location {
     private String country;
     private String city;
     private Airport airport;
-    private Date time;
+    private DateTime time;
 
     public void setCountry(String country) {
         this.country = country;
@@ -29,11 +30,11 @@ public class Location {
         return city;
     }
 
-    public void setTime(Date time) {
+    public void setTime(DateTime time) {
         this.time = time;
     }
 
-    public Date getTime() {
+    public DateTime getTime() {
         return time;
     }
 
