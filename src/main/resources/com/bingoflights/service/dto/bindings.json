@@ -1,13 +1,14 @@
 {
-   "package-name" : "com.bingoflights.model",
+   "package-name" : "com.bingoflights.service.dto",
    "xml-type" : {
     "prop-order" : "errors flights"
    },
    "java-types": {
      "java-type": [{
-      "name": "FlightsDTO"
+      "name": "ScheduledFlightsDTO"
      }],
      "java-type": [{
+      "package-name" : "com.bingoflights.model",
       "name": "Flight",
       "xml-type" : {
         "prop-order" : "flightNumber carrier departure destination"

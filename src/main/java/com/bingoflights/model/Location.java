@@ -1,13 +1,8 @@
 package com.bingoflights.model;
 
-import com.bingoflights.service.DateAdapter;
+import com.bingoflights.service.utils.DateAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //@XmlAccessorType(XmlAccessType.FIELD)
@@ -38,7 +33,6 @@ public class Location {
         this.time = time;
     }
 
-    @XmlJavaTypeAdapter(DateAdapter.class)
     public Date getTime() {
         return time;
     }

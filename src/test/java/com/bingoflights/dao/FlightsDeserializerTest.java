@@ -1,7 +1,7 @@
-package com.bingoflights.dao.moxy;
+package com.bingoflights.daos;
 
 import com.bingoflights.dao.FlightsDeserializer;
-import com.bingoflights.model.Flights;
+import com.bingoflights.model.ScheduledFlights;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import org.junit.Before;
@@ -28,21 +28,21 @@ public class FlightsDeserializerTest {
     @Test
     public void testDeserializeEmptyFlightsXml() throws IOException, JAXBException {
         testData = loadTestData("xml/international_flights_none.xml");
-        Flights noFlights = testObj.deserialize(testData);
+        ScheduledFlights noFlights = testObj.deserialize(testData);
         assertThat(noFlights.numberOfFlights(), is(0));
     }
 
     @Test
     public void testDeserializeAllFlightsXml() throws IOException, JAXBException {
         testData = loadTestData("xml/international_flights.xml");
-        Flights londonFlights = testObj.deserialize(testData);
+        ScheduledFlights londonFlights = testObj.deserialize(testData);
         assertThat(londonFlights.numberOfFlights(), is(5));
     }
 
     @Test
     public void testDesializeNewYorkFlight() throws IOException, JAXBException {
         testData = loadTestData("xml/international_flights_new_york.xml");
-        Flights newYorkFlights = testObj.deserialize(testData);
+        ScheduledFlights newYorkFlights = testObj.deserialize(testData);
         assertThat(newYorkFlights.numberOfFlights(), is(1));
     }
 

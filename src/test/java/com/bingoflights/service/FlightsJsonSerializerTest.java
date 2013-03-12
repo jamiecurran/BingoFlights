@@ -1,19 +1,24 @@
 package com.bingoflights.service;
 
-import com.bingoflights.model.Airport;
-import com.bingoflights.model.Flight;
-import com.bingoflights.model.Flights;
-import com.bingoflights.model.Location;
-import com.bingoflights.model.FlightsDTO;
+import com.bingoflights.model.*;
+import com.bingoflights.model.ScheduledFlights;
+import com.bingoflights.service.dto.ScheduledFlightsDTO;
+import com.bingoflights.service.utils.FlightsJsonSerializer;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+import org.json.JSONException;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 import javax.xml.bind.JAXBException;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Calendar;
 
 public class FlightsJsonSerializerTest {
 
     @Test
-    public void testSerializeFlightsToJson() throws JAXBException {
+    public void testSerializeFlightsToJson() throws JAXBException, JSONException, IOException {
         FlightsJsonSerializer testObj = new FlightsJsonSerializer();
 
         Flight flight = new Flight();
@@ -46,14 +51,21 @@ public class FlightsJsonSerializerTest {
         flight.setDeparture(departure);
         flight.setDestination(destination);
 
-        Flights flights = new Flights();
+        ScheduledFlights flights = new ScheduledFlights();
         flights.add(flight);
-        FlightsDTO flightsDTO = new FlightsDTO();
-        flightsDTO.setErrors(Boolean.valueOf(false));
+        ScheduledFlightsDTO scheduledFlightsDTO = new ScheduledFlightsDTO();
+        scheduledFlightsDTO.setErrors(Boolean.valueOf(false));
 
-        flightsDTO.setFlights(flights.getFlights());
+        scheduledFlightsDTO.setFlights(flights.getFlights());
 
-        System.out.println(testObj.serialize(flightsDTO));
+
+        String flightJson = testObj.serialize(scheduledFlightsDTO);
+
+        URL allFlightsURL = Resources.getResource("json/flights.json");
+        String expectedJson = Resources.toString(allFlightsURL, Charsets.UTF_8);
+
+        JSONAssert.assertEquals(expectedJson,flightJson,true);
+        System.out.println(flightJson);
 
     }
 
