@@ -1,23 +1,10 @@
 package com.bingoflights.model;
 
-import org.eclipse.persistence.oxm.annotations.XmlPath;
-
-import javax.xml.bind.annotation.*;
-
-//@XmlAccessorType(XmlAccessType.FIELD)
 public class Flight {
 
-    //@XmlAttribute(name = "number")
     private String flightNumber;
-
-    //@XmlPath("carrier/name/text()")
-    //@XmlElement(name = "carrier")
     private String carrier;
-
-    //@XmlElement(name = "departure")
     private Location departure;
-
-    //@XmlElement(name = "destination")
     private Location destination;
 
     public String getCarrier() {

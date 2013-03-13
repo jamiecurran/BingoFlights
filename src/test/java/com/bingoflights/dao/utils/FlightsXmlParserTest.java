@@ -1,18 +1,13 @@
-package com.bingoflights.dao;
+package com.bingoflights.dao.utils;
 
+import com.bingoflights.dao.utils.FlightsXmlParser;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Result;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPathExpressionException;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 

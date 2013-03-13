@@ -1,12 +1,7 @@
 package com.bingoflights.model;
 
-import com.bingoflights.service.utils.DateAdapter;
 import org.joda.time.DateTime;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.Date;
-
-//@XmlAccessorType(XmlAccessType.FIELD)
 public class Location {
 
     private String country;

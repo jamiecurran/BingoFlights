@@ -1,4 +1,4 @@
-package com.bingoflights.dao;
+package com.bingoflights.dao.utils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

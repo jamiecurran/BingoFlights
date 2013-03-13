@@ -1,6 +1,6 @@
-package com.bingoflights.daos;
+package com.bingoflights.dao.utils;
 
-import com.bingoflights.dao.FlightsDeserializer;
+import com.bingoflights.model.Flight;
 import com.bingoflights.model.ScheduledFlights;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
@@ -14,7 +14,6 @@ import java.net.URL;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-
 public class FlightsDeserializerTest {
 
     private String testData;
@@ -23,6 +22,22 @@ public class FlightsDeserializerTest {
     @Before
     public void setup(){
         testObj = new FlightsDeserializer();
+    }
+
+    @Test
+    public void testDeserializationMappingForFlightNumber() throws IOException {
+        testData = loadTestData("xml/international_flights_new_york.xml");
+        ScheduledFlights mappedFlight = testObj.deserialize(testData);
+        Flight newYorkFlight = mappedFlight.getFlights().get(0);
+        assertThat(newYorkFlight.getFlightNumber(), is("KS125666"));
+    }
+
+    @Test
+    public void testDeserializationMappingForCarrier() throws IOException {
+        testData = loadTestData("xml/international_flights_new_york.xml");
+        ScheduledFlights mappedFlight = testObj.deserialize(testData);
+        Flight newYorkFlight = mappedFlight.getFlights().get(0);
+        assertThat(newYorkFlight.getCarrier(), is("United Airlines"));
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.bingoflights.service;
+package com.bingoflights.service.utils;
 
 import com.bingoflights.model.*;
 import com.bingoflights.model.ScheduledFlights;
