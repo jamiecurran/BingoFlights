@@ -18,6 +18,8 @@ import java.util.*;
 
 public class FlightsDeserializer {
 
+    private static int EMPTY_DESERIALISED_FLIGHT = 0;
+
     public ScheduledFlights deserialize(String flightsXML){
         XStream xStream = new XStream();
         xStream.alias("flights", ScheduledFlights.class);
@@ -28,9 +30,17 @@ public class FlightsDeserializer {
         xStream.alias("depature", Location.class);
         xStream.alias("destination", Location.class);
         xStream.alias("airport", Airport.class);
-        xStream.aliasField("name", Flight.class, "carrier/name");
-
         xStream.omitField(Location.class, "service_company");
-        return (ScheduledFlights) xStream.fromXML(flightsXML);
+        ScheduledFlights scheduledFlights = (ScheduledFlights) xStream.fromXML(flightsXML);
+        filterEmptyFlights(scheduledFlights);
+        return scheduledFlights;
+    }
+
+    private void filterEmptyFlights(ScheduledFlights scheduledFlights) {
+
+        Flight flight = scheduledFlights.getFlights().get(EMPTY_DESERIALISED_FLIGHT);
+        if(flight.getFlightNumber() == null && flight.getCarrier() == null && flight.getDeparture() == null && flight.getDestination() == null){
+            scheduledFlights.getFlights().remove(EMPTY_DESERIALISED_FLIGHT);
+        }
     }
 }

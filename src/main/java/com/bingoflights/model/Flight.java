@@ -3,11 +3,11 @@ package com.bingoflights.model;
 public class Flight {
 
     private String flightNumber;
-    private String carrier;
+    private Carrier carrier;
     private Location departure;
     private Location destination;
 
-    public String getCarrier() {
+    public Carrier getCarrier() {
         return carrier;
     }
 
@@ -19,7 +19,7 @@ public class Flight {
         return flightNumber;
     }
 
-    public void setCarrier(String carrier) {
+    public void setCarrier(Carrier carrier) {
         this.carrier = carrier;
     }
 

@@ -2,17 +2,15 @@ package com.bingoflights.dao.utils;
 
 import com.bingoflights.model.Flight;
 import com.bingoflights.model.ScheduledFlights;
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.net.URL;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static com.bingoflights.testing.DataLoader.loadTestData;
 
 public class FlightsDeserializerTest {
 
@@ -37,7 +35,7 @@ public class FlightsDeserializerTest {
         testData = loadTestData("xml/international_flights_new_york.xml");
         ScheduledFlights mappedFlight = testObj.deserialize(testData);
         Flight newYorkFlight = mappedFlight.getFlights().get(0);
-        assertThat(newYorkFlight.getCarrier(), is("United Airlines"));
+        assertThat(newYorkFlight.getCarrier().getName(), is("United Airlines"));
     }
 
     @Test
@@ -59,11 +57,6 @@ public class FlightsDeserializerTest {
         testData = loadTestData("xml/international_flights_new_york.xml");
         ScheduledFlights newYorkFlights = testObj.deserialize(testData);
         assertThat(newYorkFlights.numberOfFlights(), is(1));
-    }
-
-    private String loadTestData(String file) throws IOException {
-        URL flightsXmlUrl = Resources.getResource(file);
-        return Resources.toString(flightsXmlUrl, Charsets.UTF_8);
     }
 
 }

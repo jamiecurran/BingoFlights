@@ -1,5 +1,6 @@
 package com.bingoflights.service.utils;
 
+import com.bingoflights.model.Carrier;
 import com.bingoflights.model.ScheduledFlights;
 import com.bingoflights.service.dto.ScheduledFlightsDTO;
 import com.google.gson.Gson;
@@ -21,8 +22,9 @@ public class FlightsJsonSerializer {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
         builder.registerTypeAdapter(DateTime.class, new DateAdapter());
-
+        builder.registerTypeAdapter(Carrier.class, new CarrierAdapter());
         Gson gson = builder.create();
+
         return gson.toJson(scheduledFlightsDTO);
     }
 }
