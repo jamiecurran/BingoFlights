@@ -3,7 +3,6 @@ package com.bingoflights.model;
 public class Airport {
 
     private String name;
-
     private String code;
 
     public void setName(String name) {

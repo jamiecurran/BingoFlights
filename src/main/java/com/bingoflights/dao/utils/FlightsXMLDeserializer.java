@@ -5,18 +5,8 @@ import com.bingoflights.model.Flight;
 import com.bingoflights.model.Location;
 import com.bingoflights.model.ScheduledFlights;
 import com.thoughtworks.xstream.XStream;
-import org.eclipse.persistence.jaxb.JAXBContextProperties;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.stream.XMLStreamConstants;
-import java.io.InputStream;
-import java.io.StringReader;
-import java.lang.reflect.Array;
-import java.util.*;
-
-public class FlightsDeserializer {
+public class FlightsXMLDeserializer {
 
     private static int EMPTY_DESERIALISED_FLIGHT = 0;
 
@@ -27,8 +17,10 @@ public class FlightsDeserializer {
         xStream.useAttributeFor(Flight.class, "flightNumber");
         xStream.aliasAttribute("number", "flightNumber");
         xStream.alias("flight", Flight.class);
+        xStream.registerConverter(new DateTimeConverter());
         xStream.alias("depature", Location.class);
         xStream.alias("destination", Location.class);
+        xStream.registerConverter(new AirportConverter());
         xStream.alias("airport", Airport.class);
         xStream.omitField(Location.class, "service_company");
         ScheduledFlights scheduledFlights = (ScheduledFlights) xStream.fromXML(flightsXML);

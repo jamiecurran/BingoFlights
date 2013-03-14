@@ -1,10 +1,6 @@
 package com.bingoflights.service.utils;
 
 import com.bingoflights.model.*;
-import com.bingoflights.model.ScheduledFlights;
-import com.bingoflights.service.dto.ScheduledFlightsDTO;
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.json.JSONException;
@@ -14,7 +10,6 @@ import org.skyscreamer.jsonassert.JSONAssert;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import static com.bingoflights.testing.DataLoader.loadTestData;
@@ -22,44 +17,45 @@ import static com.bingoflights.testing.DataLoader.loadTestData;
 public class FlightsJsonSerializerTest {
 
     private FlightsJsonSerializer testObj;
+    private DateTimeZone timeZone = DateTimeZone.forID("Etc/GMT-1");
 
     @Before
     public void setup(){
-        testObj = new FlightsJsonSerializer();
+        testObj = new FlightsJsonSerializer(timeZone);
     }
 
     @Test
     public void testSerializeFlightsToJson() throws JAXBException, JSONException, IOException {
-        ScheduledFlightsDTO scheduledFlightsDTO = createScheduledFlights();
-        String flightJson = testObj.serialize(scheduledFlightsDTO);
+        ScheduledFlights scheduledFlights = createScheduledFlights();
+        String flightJson = testObj.serialize(scheduledFlights);
         String expectedJson = loadTestData("json/flights.json");
         JSONAssert.assertEquals(expectedJson, flightJson, true);
     }
 
     @Test
     public void testSerializeNoFlightsToJson() throws IOException, JSONException {
-        ScheduledFlightsDTO scheduledFlightsDTO = createEmptyScheduledFlightsDTO(false);
-        String noFlightsJson = testObj.serialize(scheduledFlightsDTO);
+        ScheduledFlights scheduledFlights = createEmptyScheduledFlights(false);
+        String noFlightsJson = testObj.serialize(scheduledFlights);
         String expectedJson = loadTestData("json/empty_flights.json");
         JSONAssert.assertEquals(expectedJson, noFlightsJson, true);
     }
 
     @Test
     public void testSerializeWithErrorsToJson() throws JSONException, IOException {
-        ScheduledFlightsDTO scheduledFlightsDTO = createEmptyScheduledFlightsDTO(true);
-        String errorJson = testObj.serialize(scheduledFlightsDTO);
+        ScheduledFlights scheduledFlights = createEmptyScheduledFlights(true);
+        String errorJson = testObj.serialize(scheduledFlights);
         String expectedJson = loadTestData("json/errors_flights.json");
         JSONAssert.assertEquals(expectedJson, errorJson, true);
     }
 
-    private ScheduledFlightsDTO createEmptyScheduledFlightsDTO(boolean error) {
-        ScheduledFlightsDTO scheduledFlightsDTO = new ScheduledFlightsDTO();
-        scheduledFlightsDTO.setErrors(error);
-        scheduledFlightsDTO.setFlights(new ArrayList<Flight>(0));
-        return scheduledFlightsDTO;
+    private ScheduledFlights createEmptyScheduledFlights(boolean error) {
+        ScheduledFlights scheduledFlights = new ScheduledFlights();
+        scheduledFlights.setErrors(error);
+        scheduledFlights.setFlights(new ArrayList<Flight>(0));
+        return scheduledFlights;
     }
 
-    private ScheduledFlightsDTO createScheduledFlights() {
+    private ScheduledFlights createScheduledFlights() {
         Flight flight = new Flight();
         flight.setFlightNumber("AS125666");
 
@@ -100,11 +96,11 @@ public class FlightsJsonSerializerTest {
 
         ScheduledFlights flights = new ScheduledFlights();
         flights.add(flight);
-        ScheduledFlightsDTO scheduledFlightsDTO = new ScheduledFlightsDTO();
-        scheduledFlightsDTO.setErrors(Boolean.valueOf(false));
+        ScheduledFlights scheduledFlights = new ScheduledFlights();
+        scheduledFlights.setErrors(false);
 
-        scheduledFlightsDTO.setFlights(flights.getFlights());
-        return scheduledFlightsDTO;
+        scheduledFlights.setFlights(flights.getFlights());
+        return scheduledFlights;
     }
 
 }

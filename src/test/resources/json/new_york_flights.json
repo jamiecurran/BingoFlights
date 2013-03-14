@@ -1,0 +1,31 @@
+{
+    "errors":false,
+    "flights":[
+        {
+            "flightNumber":"KS125666",
+            "carrier":"United Airlines",
+            "departure":{
+                "country":"USA",
+                "city":"New York",
+                "airport":{
+                    "name":"John F. Kennedy International Airport",
+                    "code":"JFK"
+                },
+                "time":"2013-03-17 10:02 +0100"
+            },
+            "destination":{
+                "country":"UK",
+                "city":"London",
+                "airport":{
+                    "code":"LHW",
+                    "name":"London Heathrow"
+                },
+                "time":"2013-03-17 18:18 +0100"
+            }
+
+        }
+    ]
+}
+
+
+

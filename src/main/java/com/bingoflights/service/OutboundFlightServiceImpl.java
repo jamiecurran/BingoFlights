@@ -1,13 +1,25 @@
 package com.bingoflights.service;
 
-import com.bingoflights.service.OutboundFlightService;
+import com.bingoflights.dao.ScheduledFlightDAO;
+import com.bingoflights.model.ScheduledFlights;
+import com.bingoflights.service.utils.FlightsJsonSerializer;
+import org.joda.time.DateTimeZone;
 
 import java.util.Calendar;
 
 public class OutboundFlightServiceImpl implements OutboundFlightService {
 
+    private ScheduledFlightDAO scheduledFlightDao;
+
     @Override
     public String getFlightsDepartingFromCity(String city, Calendar onDate) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        ScheduledFlights flights = scheduledFlightDao.getFlights(city, onDate);
+        FlightsJsonSerializer flightsJsonSerializer = new FlightsJsonSerializer(DateTimeZone.forTimeZone(onDate.getTimeZone()));
+        return flightsJsonSerializer.serialize(flights);
     }
+
+    public void setScheduledFlightDao(ScheduledFlightDAO scheduledFlightDao) {
+        this.scheduledFlightDao = scheduledFlightDao;
+    }
+
 }

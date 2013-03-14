@@ -18,7 +18,20 @@ import java.io.StringReader;
 
 public class FlightsXmlParser {
 
-    public String findByCity(String city, String data) throws XPathExpressionException, ParserConfigurationException {
+    private final String data;
+
+    public FlightsXmlParser(String data){
+        this.data = data;
+    }
+
+    public Boolean hasFlightsFromCity(String city) throws XPathExpressionException {
+        String query = "//flight[departure/city/text() = '" + city + "']";
+        XPath xpath = XPathFactory.newInstance().newXPath();
+        InputSource is = new InputSource(new StringReader(data));
+        return  (Boolean) xpath.evaluate(query, is, XPathConstants.BOOLEAN);
+    }
+
+    public String findByCity(String city) throws XPathExpressionException, ParserConfigurationException {
         String query = "//flight[departure/city/text() = '" + city + "']";
         XPath xpath = XPathFactory.newInstance().newXPath();
         InputSource is = new InputSource(new StringReader(data));
