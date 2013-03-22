@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head></head>
+<body>
+<label>Select City</label>
+<form>
+    <input type="radio" name="city" value="London">London</input>
+    <input type="radio" name="city" value="New York">New York</input>
+    <input type="submit"/>
+</form>
+<table><tbody></tbody></table>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    var flightApp = flightApp || {};
+
+    flightApp.flights = {
+
+    onReady: function(){
+    var self = this;
+    $("form").submit(function(event){
+    event.preventDefault();
+    var city = $("input[name=city]:checked").val();
+    self.getFlights(city);
+    })
+    },
+    getFlights: function(city){
+    $.ajax({
+    type: "GET",
+    url: "/flights",
+    data: "city="+city,
+    dataType: "json",
+    context: flightApp.flights
+    }).done(function(data){
+    this.processFlights(data);
+    });
+    },
+    processFlights: function(flights){
+    var self = this;
+    self.clearTable();
+    $.each(flights.flights, function(index, flight){
+    self.renderFlight(flight);
+    });
+    },
+    clearTable: function(){
+    $("tbody").empty();
+    },
+    renderFlight: function(flight){
+    var flightHtml = "";
+    flightHtml += "
+    <tr>";
+        flightHtml += "
+        <td>" + flight.flightNumber + "</td>
+        ";
+        flightHtml += "
+        <td>" + flight.carrier + "</td>
+        "
+        flightHtml += "
+        <td>" + flight.departure.airport.name + "</td>
+        ";
+        flightHtml += "
+        <td>" + flight.departure.time + "</td>
+        ";
+        flightHtml += "
+        <td>" + flight.destination.airport.name + "</td>
+        ";
+        flightHtml += "
+        <td>" + flight.destination.time + "</td>
+        ";
+        flightHtml += "
+    </tr>
+    ";
+    $('tbody').append(flightHtml);
+    }
+    };
+
+    $(document).ready(flightApp.flights.onReady());
+</script>
+</body>
+</html>
