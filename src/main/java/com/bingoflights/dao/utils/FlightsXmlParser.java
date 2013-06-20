@@ -16,7 +16,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 
-public class FlightsXmlParser {
+public class FlightsXmlParser implements FlightsParser {
 
     private final String data;
 
@@ -31,6 +31,7 @@ public class FlightsXmlParser {
         return  (Boolean) xpath.evaluate(query, is, XPathConstants.BOOLEAN);
     }
 
+    @Override
     public String findByCity(String city) throws XPathExpressionException, ParserConfigurationException {
         String query = "//flight[departure/city/text() = '" + city + "']";
         XPath xpath = XPathFactory.newInstance().newXPath();
